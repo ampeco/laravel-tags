@@ -2,6 +2,26 @@
 
 All notable changes to `laravel-tags` will be documented in this file
 
+## 2.5.3 - 2019-11-07
+
+- use `morphs` in migration
+
+## 2.5.2 - 2019-09-29
+
+- `findOrCreateFromString` can now be overloaded (#231)
+
+## 2.5.1 - 2019-09-08
+
+- make `scopeContaining` compatible with Postgresql
+
+## 2.5.0 - 2019-09-04
+
+- add support for Laravel 6
+
+## 2.4.5 - 2019-07-18
+
+- fix `scopeWithAllTags`* scopes
+
 ## 2.4.4 - 2019-04-17
 
 - use `ordered()` scope to determine order column name (#193)

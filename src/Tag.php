@@ -2,11 +2,12 @@
 
 namespace Spatie\Tags;
 
-use Spatie\EloquentSortable\Sortable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Spatie\EloquentSortable\SortableTrait;
 use Illuminate\Database\Eloquent\Collection as DbCollection;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
+use Spatie\Translatable\HasTranslations;
 
 class Tag extends Model implements Sortable
 {
@@ -29,7 +30,7 @@ class Tag extends Model implements Sortable
     }
 
     /**
-     * @param array|\ArrayAccess $values
+     * @param string|array|\ArrayAccess $values
      * @param string|null $type
      *
      * @return \Spatie\Tags\Tag|static
@@ -37,7 +38,7 @@ class Tag extends Model implements Sortable
     public static function findOrCreate($values, string $type = null)
     {
         $tags = collect($values)->map(function ($value) use ($type) {
-            if ($value instanceof Tag) {
+            if ($value instanceof self) {
                 return $value;
             }
 
@@ -63,14 +64,19 @@ class Tag extends Model implements Sortable
     protected static function findOrCreateFromString(string $name, string $type = null): self
     {
         $tag = static::findFromString($name, $type);
-
         if (! $tag) {
             $tag = static::create([
                 'name' => $name,
                 'type' => $type,
             ]);
         }
-
         return $tag;
+    }
+
+    public static function findFromStringOfAnyType(string $name, string $locale = null)
+    {
+        return static::query()
+            ->where("name", $name)
+            ->first();
     }
 }

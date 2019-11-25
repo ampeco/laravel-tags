@@ -1,7 +1,7 @@
 # Add tags and taggable behaviour to a Laravel app
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-tags.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-tags)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/spatie/laravel-tags/master.svg?style=flat-square)](https://travis-ci.org/spatie/laravel-tags)
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/laravel-tags.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/laravel-tags)
 [![StyleCI](https://styleci.io/repos/71335427/shield?branch=master)](https://styleci.io/repos/71335427)
@@ -11,41 +11,41 @@ This package offers taggable behaviour for your models. After the package is ins
 
 But we didn't stop with the regular tagging capabilities you find in every package. Laravel Tags comes with batteries included. Out of the box it has support for [translating tags](https://docs.spatie.be/laravel-tags/v2/advanced-usage/adding-translations), [multiple tag types](https://docs.spatie.be/laravel-tags/v2/advanced-usage/using-types) and [sorting capabilities](https://docs.spatie.be/laravel-tags/v2/advanced-usage/sorting-tags).
 
-You'll find the documentation on https://docs.spatie.be/laravel-tags/v2.
+You'll find the documentation on https://docs.spatie.be/laravel-tags/v2/introduction/.
 
 Here are some code examples:
 
 ```php
-//create a model with some tags
+//create a model with some tags, don't forget to put "tags" on $fillable array on referred model
 $newsItem = NewsItem::create([
-   'name' => 'testModel',
-   'tags' => ['tag', 'tag2'], //tags will be created if they don't exist
+   'name' => 'The Article Title',
+   'tags' => ['first tag', 'second tag'], //tags will be created if they don't exist
 ]);
 
 //attaching tags
-$newsItem->attachTag('tag3');
-$newsItem->attachTags(['tag4', 'tag5']);
+$newsItem->attachTag('third tag');
+$newsItem->attachTags(['fourth tag', 'fifth tag']);
 
 //detaching tags
-$newsItem->detachTags('tag3');
-$newsItem->detachTags(['tag4', 'tag5']);
+$newsItem->detachTags('third tag');
+$newsItem->detachTags(['fourth tag', 'fifth tag']);
 
 //syncing tags
-$newsItem->syncTags(['tag1', 'tag2']); // all other tags on this model will be detached
+$newsItem->syncTags(['first tag', 'second tag']); // all other tags on this model will be detached
 
 //syncing tags with a type
-$newsItem->syncTagsWithType(['tag1', 'tag2'], 'typeA'); 
-$newsItem->syncTagsWithType(['tag1', 'tag2'], 'typeB'); 
+$newsItem->syncTagsWithType(['category 1', 'category 2'], 'categories'); 
+$newsItem->syncTagsWithType(['topic 1', 'topic 2'], 'topics'); 
 
 //retrieving tags with a type
-$newsItem->tagsWithType('typeA'); 
-$newsItem->tagsWithType('typeB'); 
+$newsItem->tagsWithType('categories'); 
+$newsItem->tagsWithType('topics'); 
 
 //retrieving models that have any of the given tags
-NewsItem::withAnyTags(['tag1', 'tag2'])->get();
+NewsItem::withAnyTags(['first tag', 'second tag'])->get();
 
 //retrieve models that have all of the given tags
-NewsItem::withAllTags(['tag1', 'tag2'])->get();
+NewsItem::withAllTags(['first tag', 'second tag'])->get();
 
 //translating a tag
 $tag = Tag::findOrCreate('my tag');
@@ -82,7 +82,7 @@ Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview 
 
 ## Requirements
 
-This package requires Laravel 5.8 or higher, PHP 7.1.3 or higher and a database that supports `json` fields and functions such as MySQL 5.7 or higher. 
+This package requires Laravel 5.8 or higher, PHP 7.2 or higher and a database that supports `json` fields and MySQL compatible functions.
 
 ## Installation
 
